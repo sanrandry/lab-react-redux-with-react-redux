@@ -1,38 +1,30 @@
-import {createStore} from 'redux';
+import {configureStore, createSlice} from '@reduxjs/toolkit';
 
-/**
- * Reducer function
- * this function takes the state as a parameter and returns it or modifies it and returns it depends on the action type.
- * @param {*} state 
- * @param {*} action 
- * @returns 
- */
-const reducer = (state = {counter:  0}, action) => {
-    // N.B : We can not use asyncronyous call here
-    switch (action.type) {
-      case "INC":
-        // increments the state.couter and returns the state
-        return { ...state, counter: state.counter + 1 };
-        break;
-
-      case "DEC":
-        // decrements the state.couter and returns the state
-        return { ...state, counter: state.counter - 1 };
-        break;
-
-      case "ADD":
-        // add action.payload to the state.couter and returns the state
-        return { ...state, counter: state.counter + action.payload };
-        break;
-
-      default:
-        // juste return the state
-        return state;
-        break;
+// Use the createSlice function to generate the state and the action
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState: {
+        counter: 0
+    },
+    reducers: {
+        increment: (state, action) => {
+            state.counter +=1;
+        },
+        decremente: (state, action) => {
+            state.counter -=1;
+        },
+        add: (state, action) => {
+            state.counter += action.payload;
+        }
     }
-}
+});
 
-// Create a redux store to be provided with the redux Provider
-const store = createStore(reducer);
+// Export the actions so it can be used by outside
+export const actions = counterSlice.actions;
+
+// Use the configureStore function to configure and create the store
+const store = configureStore({
+    reducer: counterSlice.reducer
+})
 
 export default store;

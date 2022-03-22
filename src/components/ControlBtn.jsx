@@ -1,21 +1,20 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { actions } from "../store";
 
 const ControlBtn = () => {
-  // Use the useDispatch hooks to dispach an action
+  // Use the dispatch hooks to dispatch an action
   const dispatch = useDispatch();
+
   const handleClickDecrementBtn = () => {
-    // dispach an action with type INC
-    dispatch({ type: "INC" });
+    // Dispatch the decremnete action
+    dispatch(actions.decremente());
   };
   const handleClickIncrementBtn = () => {
-    // dispach an action with type DEC
-    dispatch({ type: "DEC" });
+    dispatch(actions.increment());
   };
   const handleClickAddBtn = () => {
-    // dispach an action with type ADD and payload 10
-    // NB : you can use an object here like : {id: 10, name: 'test'} for exemple
-    dispatch({ type: "ADD", payload: 10 });
+    dispatch(actions.add(10));
   };
   return (
     <div style={{ display: "flex", gap: "8px" }}>
