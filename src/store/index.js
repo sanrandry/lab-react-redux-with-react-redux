@@ -8,6 +8,7 @@ import {createStore} from 'redux';
  * @returns 
  */
 const reducer = (state = {counter:  0}, action) => {
+    // N.B : We can not use asyncronyous call here
     switch (action.type) {
       case "INC":
         // increments the state.couter and returns the state
